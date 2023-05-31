@@ -1,0 +1,59 @@
+[
+	{
+		"code": "P",
+		"propName": "price",
+		"label": "Price",
+		"options": {
+			"min": 1000,
+			"max": 4000,
+			"step": 100
+		}
+	},
+	{
+		"code": "A",
+		"propName": "age",
+		"label": "Age",
+		"options": {
+			"min": 1,
+			"max": 15,
+			"step": 1
+		}
+	},
+	{
+		"code": "E",
+		"propName": "eyeColor",
+		"label": "Eye color",
+		"options": [
+			"amber",
+			"blue",
+			"brown",
+			"green",
+			"hazel",
+			"yellow"
+		]
+	},
+	{
+		"code": "G",
+		"propName": "gender",
+		"label": "Gender",
+		"options": [
+			"male",
+			"female"
+		]
+	},
+	{
+		"code": "T",
+		"propName": "tags",
+		"label": "Tags",
+		"options": [
+			"aggressive",
+			"agitated",
+			"calm",
+			"courageous",
+			"docile",
+			"fearful",
+			"shy",
+			"wilful"
+		]
+	}
+]
