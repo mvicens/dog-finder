@@ -1,2 +1,1 @@
-# dog-finder
-Dog Finder
+# Dog Finder
