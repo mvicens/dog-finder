@@ -72,14 +72,14 @@ function App() {
 						<div className='mb-3 invisible'>{counterText}</div>
 						<section className='card text-bg-dark'>
 							<div className='card-body'>
-								<h2 className='card-title h6 text-center'>Filtering criteria</h2>
+								<h2 className='card-title h6 text-center mb-3'>Filtering criteria</h2>
 								{groups.map((group, index) => (
 									<Fragment key={index}>
-										{index ? <div className='text-center'><span className='badge bg-secondary'>and</span></div> : ''}
+										{!!index && <div className='text-center mt-n3'><span className='badge bg-secondary text-uppercase'>and</span></div>}
 										<Group item={group} index={index} updateFiltering={updateFiltering} />
 									</Fragment>
 								))}
-								<button type='button' className='btn btn-dark w-100' onClick={addGroup}>Add group</button>
+								<button className='btn btn-dark w-100' onClick={addGroup}>Add group</button>
 							</div>
 						</section>
 					</div>

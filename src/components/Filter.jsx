@@ -29,7 +29,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 	}
 
 	return (
-		<article className='card text-bg-dark border-0'>
+		<article className='card text-bg-dark border-0 mb-3'>
 			<div className='card-body p-1'>
 				<select className='form-select form-select-sm' value={item.feature} onChange={e => changeFilter('feature', e.target.value)}>
 					<option value={''}>Choose field</option>
@@ -59,7 +59,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 							</>
 						)
 				) : ''}
-				<button type='button' className='btn btn-dark btn-sm float-end' onClick={deleteFilter}>x</button>
+				<button className='btn btn-dark btn-sm float-end' onClick={deleteFilter}>x</button>
 			</div>
 		</article>
 	);

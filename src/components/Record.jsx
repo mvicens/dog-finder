@@ -11,7 +11,7 @@ function Record({ data }) {
 			<div className='card-body'>
 				<div className='clearfix'>
 					<h3 className='card-title h5 float-start'>{data.name}</h3>
-					<div className='float-end'>{getCurrencyFormat(data.price)}</div>
+					<div className='text-white-50 float-end'>{getCurrencyFormat(data.price)}</div>
 				</div>
 				<img src={data.picture} alt={'Photo of ' + data.name} className='mb-2' />
 				<div className='row'>
@@ -20,7 +20,7 @@ function Record({ data }) {
 							{features.map(feature => (
 								<Fragment key={feature.code}>
 									<dt className='col-sm-6'>{feature.label}</dt>
-									<dd className='col-sm-6 mb-0'>{data[feature.propName]}</dd>
+									<dd className='col-sm-6 text-white-50 mb-0'>{data[feature.propName]}</dd>
 								</Fragment>
 							))}
 						</dl>

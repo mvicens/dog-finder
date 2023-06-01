@@ -11,16 +11,16 @@ function Group({ item, index: groupIndex, updateFiltering }) {
 	}
 
 	return (
-		<article className='card text-bg-secondary'>
+		<article className='card text-bg-secondary mb-3'>
 			<div className='card-body'>
 				{item.map((filter, filterIndex) => (
 					<Fragment key={filterIndex}>
-						{filterIndex ? <div className='text-center'><span className='badge bg-secondary'>or</span></div> : ''}
+						{!!filterIndex && <div className='text-center mt-n3'><span className='badge bg-secondary text-uppercase'>or</span></div>}
 						<Filter item={filter} groupIndex={groupIndex} filterIndex={filterIndex} updateFiltering={updateFiltering} />
 					</Fragment>
 				))}
-				<button type='button' className='btn btn-dark btn-sm' onClick={addFilter}>Add filter</button>
-				<button type='button' className='btn btn-dark btn-sm float-end' onClick={deleteGroup}>Delete group</button>
+				<button className='btn btn-dark btn-sm' onClick={addFilter}>Add filter</button>
+				<button className='btn btn-dark btn-sm float-end' onClick={deleteGroup}>Delete group</button>
 			</div>
 		</article>
 	);
