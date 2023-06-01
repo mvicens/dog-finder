@@ -7,7 +7,7 @@ for (const code of ['G', 'A', 'E'])
 
 function Record({ data }) {
 	return (
-		<article className='card mb-3'>
+		<article className='card text-bg-dark mb-3'>
 			<div className='card-body'>
 				<div className='clearfix'>
 					<h3 className='card-title h5 float-start'>{data.name}</h3>

@@ -29,9 +29,9 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 	}
 
 	return (
-		<article className='card'>
+		<article className='card text-bg-dark border-0'>
 			<div className='card-body p-1'>
-				<select value={item.feature} onChange={e => changeFilter('feature', e.target.value)}>
+				<select className='form-select form-select-sm' value={item.feature} onChange={e => changeFilter('feature', e.target.value)}>
 					<option value={''}>Choose field</option>
 					{features.map(feature => <option key={feature.code} value={feature.code}>{feature.label}</option>)}
 				</select>
@@ -40,7 +40,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 						(
 							<>
 								<span> is </span>
-								<select value={item.option} onChange={e => changeFilter('option', e.target.value)}>
+								<select className='form-select form-select-sm' value={item.option} onChange={e => changeFilter('option', e.target.value)}>
 									{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
 								</select>
 							</>
@@ -49,17 +49,17 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 						(
 							<>
 								<span> between </span>
-								<select value={item.minOption} onChange={e => changeFilter('minOption', e.target.value)}>
+								<select className='form-select form-select-sm' value={item.minOption} onChange={e => changeFilter('minOption', e.target.value)}>
 									{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
 								</select>
 								<span> and </span>
-								<select value={item.maxOption} onChange={e => changeFilter('maxOption', e.target.value)}>
+								<select className='form-select form-select-sm' value={item.maxOption} onChange={e => changeFilter('maxOption', e.target.value)}>
 									{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
 								</select>
 							</>
 						)
 				) : ''}
-				<button type='button' className='btn btn-secondary btn-sm float-end' onClick={deleteFilter}>x</button>
+				<button type='button' className='btn btn-dark btn-sm float-end' onClick={deleteFilter}>x</button>
 			</div>
 		</article>
 	);

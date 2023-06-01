@@ -1,0 +1,13 @@
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+
+.btn-dark {
+	border-color: $light;
+}
+
+.card {
+	&.text-bg-secondary,
+	&.text-bg-dark {
+		border-color: $light;
+	}
+}

@@ -11,7 +11,7 @@ function Group({ item, index: groupIndex, updateFiltering }) {
 	}
 
 	return (
-		<article className='card'>
+		<article className='card text-bg-secondary'>
 			<div className='card-body'>
 				{item.map((filter, filterIndex) => (
 					<Fragment key={filterIndex}>
@@ -19,8 +19,8 @@ function Group({ item, index: groupIndex, updateFiltering }) {
 						<Filter item={filter} groupIndex={groupIndex} filterIndex={filterIndex} updateFiltering={updateFiltering} />
 					</Fragment>
 				))}
-				<button type='button' className='btn btn-secondary btn-sm' onClick={addFilter}>Add filter</button>
-				<button type='button' className='btn btn-secondary btn-sm float-end' onClick={deleteGroup}>Delete group</button>
+				<button type='button' className='btn btn-dark btn-sm' onClick={addFilter}>Add filter</button>
+				<button type='button' className='btn btn-dark btn-sm float-end' onClick={deleteGroup}>Delete group</button>
 			</div>
 		</article>
 	);
