@@ -30,7 +30,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 
 	return (
 		<article className='card'>
-			<div className='card-body'>
+			<div className='card-body p-1'>
 				<select value={item.feature} onChange={e => changeFilter('feature', e.target.value)}>
 					<option value={''}>Choose field</option>
 					{features.map(feature => <option key={feature.code} value={feature.code}>{feature.label}</option>)}

@@ -7,20 +7,20 @@ for (const code of ['G', 'A', 'E'])
 
 function Record({ data }) {
 	return (
-		<article className='card'>
+		<article className='card mb-3'>
 			<div className='card-body'>
 				<div className='clearfix'>
 					<h3 className='card-title h5 float-start'>{data.name}</h3>
 					<div className='float-end'>{getCurrencyFormat(data.price)}</div>
 				</div>
-				<img src={data.picture} alt={'Photo of ' + data.name} />
+				<img src={data.picture} alt={'Photo of ' + data.name} className='mb-2' />
 				<div className='row'>
 					<section className='col'>
 						<dl className='row card-text'>
 							{features.map(feature => (
 								<Fragment key={feature.code}>
 									<dt className='col-sm-6'>{feature.label}</dt>
-									<dd className='col-sm-6'>{data[feature.propName]}</dd>
+									<dd className='col-sm-6 mb-0'>{data[feature.propName]}</dd>
 								</Fragment>
 							))}
 						</dl>
