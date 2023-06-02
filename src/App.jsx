@@ -13,7 +13,7 @@ function App() {
 		getRecordsFetch()
 			.then(data => data.filter(record => {
 				for (const group of groups) {
-					const definedFilters = group.filter(filter => filter.feature);
+					const definedFilters = group.filter(filter => filter.feature && (filter.option || filter.minOption));
 					if (definedFilters.length) {
 						const hasAnyMatch = definedFilters.some(filter => {
 							const feature = getFeature(filter.feature);

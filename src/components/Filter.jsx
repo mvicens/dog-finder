@@ -16,7 +16,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 					newFeature = getFeature(value);
 				if (newFeature) {
 					if (newFeature.isCategorical)
-						filter.option = newFeature.options[0];
+						filter.option = '';
 					else {
 						filter.minOption = newFeature.options[0];
 						filter.maxOption = newFeature.options.at(-1);
@@ -41,6 +41,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 							<>
 								<span> is </span>
 								<select className='form-select form-select-sm' value={item.option} onChange={e => changeFilter('option', e.target.value)}>
+									<option value={''}>Choose category</option>
 									{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
 								</select>
 							</>
