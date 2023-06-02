@@ -11,11 +11,11 @@ function Group({ item, index: groupIndex, updateFiltering }) {
 	}
 
 	return (
-		<article className='card text-bg-secondary mb-3'>
+		<article className='card text-bg-light mb-3'>
 			<div className='card-body'>
 				{item.map((filter, filterIndex) => (
 					<Fragment key={filterIndex}>
-						{!!filterIndex && <div className='text-center mt-n3'><span className='badge bg-secondary text-uppercase'>or</span></div>}
+						{!!filterIndex && <div className='text-center mt-n3'><span className='badge text-bg-primary text-uppercase'>or</span></div>}
 						<Filter item={filter} groupIndex={groupIndex} filterIndex={filterIndex} updateFiltering={updateFiltering} />
 					</Fragment>
 				))}

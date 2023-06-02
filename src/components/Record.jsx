@@ -27,7 +27,7 @@ function Record({ data }) {
 					</section>
 					<section className='col'>
 						<ul className='list-inline card-text'>
-							{data.tags.map(tag => <li className='list-inline-item' key={tag}><span className='badge bg-secondary'>{tag}</span></li>)}
+							{data.tags.map(tag => <li className='list-inline-item' key={tag}><span className='badge rounded-pill text-bg-info'>{tag}</span></li>)}
 						</ul>
 					</section>
 				</div>

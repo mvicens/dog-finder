@@ -75,7 +75,7 @@ function App() {
 								<h2 className='card-title h6 text-center mb-3'>Filtering criteria</h2>
 								{groups.map((group, index) => (
 									<Fragment key={index}>
-										{!!index && <div className='text-center mt-n3'><span className='badge bg-secondary text-uppercase'>and</span></div>}
+										{!!index && <div className='text-center mt-n3'><span className='badge text-bg-secondary text-uppercase'>and</span></div>}
 										<Group item={group} index={index} updateFiltering={updateFiltering} />
 									</Fragment>
 								))}

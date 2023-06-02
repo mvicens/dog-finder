@@ -1,13 +1,15 @@
 @import "variables";
 @import "~bootstrap/scss/bootstrap";
 
+$gray: map-get($colors, "gray");
+
 .btn-dark {
-	border-color: $light;
+	border-color: $gray;
 }
 
 .card {
-	&.text-bg-secondary,
+	&.text-bg-light,
 	&.text-bg-dark {
-		border-color: $light;
+		border-color: $gray;
 	}
 }
