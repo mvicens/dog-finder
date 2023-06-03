@@ -1,4 +1,4 @@
-import { getFeature } from '../utils';
+import { getFeature } from '../assets/utils';
 import features from '../assets/features.json';
 
 function Filter({ item, groupIndex, filterIndex, updateFiltering }) {

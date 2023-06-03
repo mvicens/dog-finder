@@ -1,5 +1,5 @@
 import { useState, useEffect, Fragment } from 'react';
-import { getRecordsFetch, getFeature, getNumberFormat } from './utils';
+import { getRecordsFetch, getFeature, getNumberFormat } from './assets/utils';
 import Group from './components/Group';
 import Record from './components/Record';
 

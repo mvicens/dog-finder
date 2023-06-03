@@ -1,4 +1,4 @@
-import { getFeature, getCurrencyFormat } from '../utils';
+import { getFeature, getCurrencyFormat } from '../assets/utils';
 import { Fragment } from 'react';
 
 const features = [];

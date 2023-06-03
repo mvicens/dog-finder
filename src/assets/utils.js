@@ -12,7 +12,7 @@ function getRecordsFetch() {
 		}));
 }
 
-import features from './assets/features.json';
+import features from './features.json';
 for (const feature of features) {
 	feature.isCategorical = Array.isArray(feature.options);
 	if (!feature.isCategorical) {

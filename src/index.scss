@@ -1,4 +1,4 @@
-@import "variables";
+@import "./assets/bootstrap/bootstrap.scss";
 @import "~bootstrap/scss/bootstrap";
 
 $gray: map-get($colors, "gray");
