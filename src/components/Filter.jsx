@@ -31,36 +31,58 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 	return (
 		<article className='card text-bg-dark border-0 mb-3'>
 			<div className='card-body p-1'>
-				<select className='form-select form-select-sm' value={item.feature} onChange={e => changeFilter('feature', e.target.value)}>
-					<option value={''}>Choose field</option>
-					{features.map(feature => <option key={feature.code} value={feature.code}>{feature.label}</option>)}
-				</select>
-				{feature ? (
-					feature.isCategorical ?
-						(
-							<>
-								<span> is </span>
-								<select className='form-select form-select-sm' value={item.option} onChange={e => changeFilter('option', e.target.value)}>
-									<option value={''}>Choose category</option>
-									{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
+				<div className='row'>
+					<div className='col'>
+						<div className='row row-cols-auto gx-1'>
+							<div className='col'>
+								<select className='form-select form-select-sm' value={item.feature} onChange={e => changeFilter('feature', e.target.value)}>
+									<option value={''}>Choose field</option>
+									{features.map(feature => <option key={feature.code} value={feature.code}>{feature.label}</option>)}
 								</select>
-							</>
-						)
-						:
-						(
-							<>
-								<span> between </span>
-								<select className='form-select form-select-sm' value={item.minOption} onChange={e => changeFilter('minOption', e.target.value)}>
-									{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
-								</select>
-								<span> and </span>
-								<select className='form-select form-select-sm' value={item.maxOption} onChange={e => changeFilter('maxOption', e.target.value)}>
-									{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
-								</select>
-							</>
-						)
-				) : ''}
-				<button className='btn btn-dark btn-sm float-end' onClick={deleteFilter}>x</button>
+							</div>
+							{feature ? (
+								feature.isCategorical ?
+									(
+										<>
+											<div className='col'>
+												<span>is</span>
+											</div>
+											<div className='col'>
+												<select className='form-select form-select-sm' value={item.option} onChange={e => changeFilter('option', e.target.value)}>
+													<option value={''}>Choose category</option>
+													{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
+												</select>
+											</div>
+										</>
+									)
+									:
+									(
+										<>
+											<div className='col'>
+												<span>between</span>
+											</div>
+											<div className='col'>
+												<select className='form-select form-select-sm' value={item.minOption} onChange={e => changeFilter('minOption', e.target.value)}>
+													{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
+												</select>
+											</div>
+											<div className='col'>
+												<span>and</span>
+											</div>
+											<div className='col'>
+												<select className='form-select form-select-sm' value={item.maxOption} onChange={e => changeFilter('maxOption', e.target.value)}>
+													{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
+												</select>
+											</div>
+										</>
+									)
+							) : ''}
+						</div>
+					</div>
+					<div className='col-auto'>
+						<button className='btn btn-dark btn-sm' onClick={deleteFilter}>x</button>
+					</div>
+				</div>
 			</div>
 		</article>
 	);
