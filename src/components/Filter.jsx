@@ -30,10 +30,10 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 
 	return (
 		<article className='card text-bg-dark border-0 mb-3'>
-			<div className='card-body p-1'>
+			<div className='card-body p-2'>
 				<div className='row'>
 					<div className='col'>
-						<div className='row row-cols-auto gx-1'>
+						<div className='row row-cols-auto gx-3'>
 							<div className='col'>
 								<select className='form-select form-select-sm' value={item.feature} onChange={e => changeFilter('feature', e.target.value)}>
 									<option value={''}>Choose field</option>

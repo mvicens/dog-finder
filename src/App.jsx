@@ -64,18 +64,18 @@ function App() {
 	return (
 		<div className='container my-4'>
 			<header>
-				<h1 className='h3 text-center mb-4'>Dog Finder</h1>
+				<h1 className='fw-bold text-center mb-4'>Dog Finder</h1>
 			</header>
 			<main>
 				<div className='row'>
 					<div className='col'>
-						<div className='mb-3 invisible'>{counterText}</div>
+						<div className='mb-4 invisible'>{counterText}</div>
 						<section className='card text-bg-dark'>
 							<div className='card-body'>
 								<h2 className='card-title h6 text-center mb-3'>Filtering criteria</h2>
 								{groups.map((group, index) => (
 									<Fragment key={index}>
-										{!!index && <div className='text-center mt-n3'><span className='badge text-bg-secondary text-uppercase'>and</span></div>}
+										{!!index && <div className='badge-container text-center mt-n3'><span className='badge text-bg-secondary text-uppercase'>and</span></div>}
 										<Group item={group} index={index} updateFiltering={updateFiltering} />
 									</Fragment>
 								))}
@@ -86,7 +86,7 @@ function App() {
 					<section className='col'>
 						<header>
 							<h2 className='visually-hidden'>Filtered list</h2>
-							<div className='text-center mb-3'>{counterText}</div>
+							<div className='text-center mb-4'>{counterText}</div>
 						</header>
 						{records.map(item => <Record key={item._id} data={item} />)}
 					</section>

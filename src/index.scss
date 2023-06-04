@@ -14,3 +14,23 @@ $gray: map-get($colors, "gray");
 		border-color: $gray;
 	}
 }
+
+.badge {
+	@each $color, $value in $theme-colors {
+		&.text-bg-#{$color} {
+			color: tint-color($value, 60%) !important;
+			border: 2px solid tint-color($value, 40%);
+		}
+	}
+}
+
+.badge-container {
+	position: relative;
+	$length: $spacer * .25;
+	top: -$length;
+	margin-bottom: -($length * 2);
+	z-index: 1;
+	.badge {
+		line-height: inherit;
+	}
+}

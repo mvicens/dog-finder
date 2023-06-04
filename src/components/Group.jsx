@@ -15,7 +15,7 @@ function Group({ item, index: groupIndex, updateFiltering }) {
 			<div className='card-body'>
 				{item.map((filter, filterIndex) => (
 					<Fragment key={filterIndex}>
-						{!!filterIndex && <div className='text-center mt-n3'><span className='badge text-bg-primary text-uppercase'>or</span></div>}
+						{!!filterIndex && <div className='badge-container text-center mt-n3'><span className='badge text-bg-primary text-uppercase'>or</span></div>}
 						<Filter item={filter} groupIndex={groupIndex} filterIndex={filterIndex} updateFiltering={updateFiltering} />
 					</Fragment>
 				))}

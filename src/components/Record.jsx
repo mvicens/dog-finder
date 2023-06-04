@@ -19,8 +19,8 @@ function Record({ data }) {
 						<dl className='row card-text'>
 							{features.map(feature => (
 								<Fragment key={feature.name}>
-									<dt className='col-sm-6'>{feature.label}</dt>
-									<dd className='col-sm-6 text-white-50 mb-0'>{data[feature.name]}</dd>
+									<dt className='col-sm-4'>{feature.label}</dt>
+									<dd className='col-sm-8 text-white-50 mb-0'>{data[feature.name]}</dd>
 								</Fragment>
 							))}
 						</dl>
