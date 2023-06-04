@@ -1,8 +1,9 @@
-@import "./assets/bootstrap/bootstrap.scss";
+@import "./assets/bootstrap/bootstrap";
 @import "~bootstrap/scss/bootstrap";
 
 $gray: map-get($colors, "gray");
 
+.btn-light,
 .btn-dark {
 	border-color: $gray;
 }

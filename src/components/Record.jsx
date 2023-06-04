@@ -13,7 +13,7 @@ function Record({ data }) {
 					<h3 className='card-title h5 float-start'>{data.name}</h3>
 					<div className='text-white-50 float-end'>{getCurrencyFormat(data.price)}</div>
 				</div>
-				<img src={data.picture} alt={'Photo of ' + data.name} className='mb-2' />
+				<img src={data.picture} alt={'Photo of ' + data.name} className='w-100 mb-2' />
 				<div className='row'>
 					<section className='col'>
 						<dl className='row card-text'>

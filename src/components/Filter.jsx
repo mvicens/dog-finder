@@ -40,13 +40,11 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 									{features.map(feature => <option key={feature.code} value={feature.code}>{feature.label}</option>)}
 								</select>
 							</div>
-							{feature ? (
+							{feature && (
 								feature.isCategorical ?
 									(
 										<>
-											<div className='col'>
-												<span>is</span>
-											</div>
+											<div className='col'><span>is</span></div>
 											<div className='col'>
 												<select className='form-select form-select-sm' value={item.option} onChange={e => changeFilter('option', e.target.value)}>
 													<option value={''}>Choose category</option>
@@ -58,17 +56,13 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 									:
 									(
 										<>
-											<div className='col'>
-												<span>between</span>
-											</div>
+											<div className='col'><span>between</span></div>
 											<div className='col'>
 												<select className='form-select form-select-sm' value={item.minOption} onChange={e => changeFilter('minOption', e.target.value)}>
 													{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
 												</select>
 											</div>
-											<div className='col'>
-												<span>and</span>
-											</div>
+											<div className='col'><span>and</span></div>
 											<div className='col'>
 												<select className='form-select form-select-sm' value={item.maxOption} onChange={e => changeFilter('maxOption', e.target.value)}>
 													{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
@@ -76,11 +70,11 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 											</div>
 										</>
 									)
-							) : ''}
+							)}
 						</div>
 					</div>
 					<div className='col-auto'>
-						<button className='btn btn-dark btn-sm' onClick={deleteFilter}>x</button>
+						<button className='btn btn-light btn-sm' onClick={deleteFilter}>🗙</button>
 					</div>
 				</div>
 			</div>
