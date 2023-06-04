@@ -37,7 +37,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }) {
 							<div className='col'>
 								<select className='form-select form-select-sm' value={item.feature} onChange={e => changeFilter('feature', e.target.value)}>
 									<option value={''}>Choose field</option>
-									{features.map(feature => <option key={feature.code} value={feature.code}>{feature.label}</option>)}
+									{features.map(feature => <option key={feature.name} value={feature.name}>{feature.label}</option>)}
 								</select>
 							</div>
 							{feature && (

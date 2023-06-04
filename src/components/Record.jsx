@@ -2,8 +2,8 @@ import { getFeature, getCurrencyFormat } from '../assets/utils';
 import { Fragment } from 'react';
 
 const features = [];
-for (const code of ['G', 'A', 'E'])
-	features.push(getFeature(code));
+for (const name of ['gender', 'age', 'eyeColor'])
+	features.push(getFeature(name));
 
 function Record({ data }) {
 	return (
@@ -18,9 +18,9 @@ function Record({ data }) {
 					<section className='col'>
 						<dl className='row card-text'>
 							{features.map(feature => (
-								<Fragment key={feature.code}>
+								<Fragment key={feature.name}>
 									<dt className='col-sm-6'>{feature.label}</dt>
-									<dd className='col-sm-6 text-white-50 mb-0'>{data[feature.propName]}</dd>
+									<dd className='col-sm-6 text-white-50 mb-0'>{data[feature.name]}</dd>
 								</Fragment>
 							))}
 						</dl>

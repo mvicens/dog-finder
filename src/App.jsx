@@ -18,13 +18,13 @@ function App() {
 						const hasAnyMatch = definedFilters.some(filter => {
 							const feature = getFeature(filter.feature);
 							if (feature.isCategorical) {
-								let value = record[feature.propName];
+								let value = record[feature.name];
 								if (typeof value == 'string')
 									value = [value];
 								if (value.some(v => v == filter.option))
 									return true;
 							} else {
-								const value = record[feature.propName];
+								const value = record[feature.name];
 								if (filter.minOption <= value && filter.maxOption >= value)
 									return true;
 							}

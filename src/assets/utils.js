@@ -24,8 +24,8 @@ for (const feature of features) {
 	}
 }
 
-function getFeature(code) {
-	return features.filter(feature => feature.code == code).at(0);
+function getFeature(name) {
+	return features.filter(feature => feature.name == name).at(0);
 }
 
 const numFormatter = new Intl.NumberFormat('en-US', {}),

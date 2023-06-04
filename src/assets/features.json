@@ -1,7 +1,6 @@
 [
 	{
-		"code": "P",
-		"propName": "price",
+		"name": "price",
 		"label": "Price",
 		"options": {
 			"min": 1000,
@@ -10,8 +9,7 @@
 		}
 	},
 	{
-		"code": "A",
-		"propName": "age",
+		"name": "age",
 		"label": "Age",
 		"options": {
 			"min": 1,
@@ -20,8 +18,7 @@
 		}
 	},
 	{
-		"code": "E",
-		"propName": "eyeColor",
+		"name": "eyeColor",
 		"label": "Eye color",
 		"options": [
 			"amber",
@@ -33,8 +30,7 @@
 		]
 	},
 	{
-		"code": "G",
-		"propName": "gender",
+		"name": "gender",
 		"label": "Gender",
 		"options": [
 			"male",
@@ -42,8 +38,7 @@
 		]
 	},
 	{
-		"code": "T",
-		"propName": "tags",
+		"name": "tags",
 		"label": "Tags",
 		"options": [
 			"aggressive",
