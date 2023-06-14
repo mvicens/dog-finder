@@ -3,48 +3,59 @@ import { getRecordsFetch, getFeature, getNumberFormat } from './assets/utils';
 import Group from './components/Group';
 import Record from './components/Record';
 
+let totalRecords = [];
+
 function App() {
-	const [groups, setGroups] = useState([]),
+	const [isReady, setIsReady] = useState(false),
+		[groups, setGroups] = useState([]),
 		NO_AMOUNT_TEXT = 'No dogs found',
 		[counterText, setCounterText] = useState(NO_AMOUNT_TEXT),
 		[records, setRecords] = useState([]);
 
 	useEffect(() => {
-		getRecordsFetch()
-			.then(data => data.filter(record => {
-				for (const group of groups) {
-					const definedFilters = group.filter(filter => filter.feature && (filter.option || filter.minOption));
-					if (definedFilters.length) {
-						const hasAnyMatch = definedFilters.some(filter => {
-							const feature = getFeature(filter.feature);
-							if (feature.isCategorical) {
-								let value = record[feature.name];
-								if (typeof value == 'string')
-									value = [value];
-								if (value.some(v => v == filter.option))
-									return true;
-							} else {
-								const value = record[feature.name];
-								if (filter.minOption <= value && filter.maxOption >= value)
-									return true;
-							}
-						});
-						if (!hasAnyMatch)
-							return false;
-					}
-				}
-				return true;
-			}))
-			.then(records => {
-				let counterText = NO_AMOUNT_TEXT;
-				if (records.length) {
-					const number = getNumberFormat(records.length);
-					counterText = records.length == 1 ? number + ' dog found' : number + ' dogs found';
-				}
-
-				setCounterText(counterText);
+		getRecordsFetch().then(records => {
+			if (!isReady) {
+				totalRecords = records;
 				setRecords(records);
-			});
+				setIsReady(true);
+			}
+		});
+	}, []);
+
+	useEffect(() => {
+		const records = totalRecords.filter(record => {
+			for (const group of groups) {
+				const definedFilters = group.filter(filter => filter.feature && (filter.option || filter.minOption));
+				if (definedFilters.length) {
+					const hasAnyMatch = definedFilters.some(filter => {
+						const feature = getFeature(filter.feature);
+						if (feature.isCategorical) {
+							let value = record[feature.name];
+							if (typeof value == 'string')
+								value = [value];
+							if (value.some(v => v == filter.option))
+								return true;
+						} else {
+							const value = record[feature.name];
+							if (filter.minOption <= value && filter.maxOption >= value)
+								return true;
+						}
+					});
+					if (!hasAnyMatch)
+						return false;
+				}
+			}
+			return true;
+		});
+
+		let counterText = NO_AMOUNT_TEXT;
+		if (records.length) {
+			const number = getNumberFormat(records.length);
+			counterText = records.length == 1 ? number + ' dog found' : number + ' dogs found';
+		}
+
+		setCounterText(counterText);
+		setRecords(records);
 	}, [groups]);
 
 	function addGroup() {
@@ -61,6 +72,8 @@ function App() {
 		});
 	}
 
+	if (!isReady)
+		return null;
 	return (
 		<div className='container my-4'>
 			<header>
