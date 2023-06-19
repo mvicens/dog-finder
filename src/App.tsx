@@ -1,16 +1,17 @@
+import { Records, Groups } from './assets/types.ts';
 import { useState, useEffect, Fragment } from 'react';
-import { getRecordsFetch, getFeature, getNumberFormat } from './assets/utils';
+import { getRecordsFetch, getNumberFormat } from './assets/utils';
 import Group from './components/Group';
 import Record from './components/Record';
 
-let totalRecords = [];
+let totalRecords: Records = [];
 
 function App() {
 	const [isReady, setIsReady] = useState(false),
-		[groups, setGroups] = useState([]),
+		[groups, setGroups]: [Groups, Function] = useState([]),
 		NO_AMOUNT_TEXT = 'No dogs found',
 		[counterText, setCounterText] = useState(NO_AMOUNT_TEXT),
-		[records, setRecords] = useState([]);
+		[records, setRecords]: [Records, Function] = useState([]);
 
 	useEffect(() => {
 		getRecordsFetch().then(records => {
@@ -25,21 +26,21 @@ function App() {
 	useEffect(() => {
 		const records = totalRecords.filter(record => {
 			for (const group of groups) {
-				const definedFilters = group.filter(filter => filter.feature && (filter.option || filter.minOption));
+				const definedFilters = group.filter(filter => filter.feature && filter.option);
 				if (definedFilters.length) {
 					const hasAnyMatch = definedFilters.some(filter => {
-						const feature = getFeature(filter.feature);
-						if (feature.isCategorical) {
-							let value = record[feature.name];
-							if (typeof value == 'string')
-								value = [value];
-							if (value.some(v => v == filter.option))
-								return true;
-						} else {
-							const value = record[feature.name];
-							if (filter.minOption <= value && filter.maxOption >= value)
-								return true;
+						const featureName = filter.feature;
+						if (featureName === '')
+							return;
+						const option = filter.option;
+						if (['price', 'age'].includes(featureName)) {
+							const value = record[featureName];
+							return option[0] <= value && option[1] >= value;
 						}
+						if (featureName == 'tags')
+							return record[featureName].some(v => v == option);
+						if (record[featureName] == option)
+							return true;
 					});
 					if (!hasAnyMatch)
 						return false;
@@ -59,13 +60,13 @@ function App() {
 	}, [groups]);
 
 	function addGroup() {
-		updateFiltering(groups => groups.push([
+		updateFiltering((groups: Groups) => groups.push([
 			{ feature: '' } // Initially one filter
 		]));
 	}
 
-	function updateFiltering(cb) {
-		setGroups(groups => {
+	function updateFiltering(cb: Function) {
+		setGroups((groups: Groups) => {
 			const newGroups = structuredClone(groups);
 			cb(newGroups);
 			return newGroups;

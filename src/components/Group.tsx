@@ -1,19 +1,20 @@
+import { Group as GroupType, Groups, Filter as FilterType } from '../assets/types.ts';
 import { Fragment } from 'react';
 import Filter from './Filter';
 
-function Group({ item, index: groupIndex, updateFiltering }) {
+function Group({ item, index: groupIndex, updateFiltering }: { item: GroupType; index: number; updateFiltering: Function; }) {
 	function deleteGroup() {
-		updateFiltering(groups => groups.splice(groupIndex, 1));
+		updateFiltering((groups: Groups) => groups.splice(groupIndex, 1));
 	}
 
 	function addFilter() {
-		updateFiltering(groups => groups[groupIndex].push({ feature: '' }));
+		updateFiltering((groups: Groups) => groups[groupIndex].push({ feature: '' }));
 	}
 
 	return (
 		<article className='card text-bg-light mb-3'>
 			<div className='card-body'>
-				{item.map((filter, filterIndex) => (
+				{item.map((filter: FilterType, filterIndex: number) => (
 					<Fragment key={filterIndex}>
 						{!!filterIndex && <div className='badge-container text-center mt-n3'><span className='badge text-bg-primary text-uppercase'>or</span></div>}
 						<Filter item={filter} groupIndex={groupIndex} filterIndex={filterIndex} updateFiltering={updateFiltering} />

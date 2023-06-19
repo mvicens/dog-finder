@@ -1,6 +1,6 @@
 # Dog Finder
 
-Solution of [Tyrceo](https://github.com/Tyrceo)'s [Dog Finder](https://github.com/Tyrceo/Dog-Finder-Instructions), using JavaScript without SWC.
+Solution of [Tyrceo](https://github.com/Tyrceo)'s [Dog Finder](https://github.com/Tyrceo/Dog-Finder-Instructions), using TypeScript without SWC.
 
 ## Getting started
 

@@ -1,23 +1,5 @@
 [
 	{
-		"name": "price",
-		"label": "Price",
-		"options": {
-			"min": 1000,
-			"max": 4000,
-			"step": 100
-		}
-	},
-	{
-		"name": "age",
-		"label": "Age",
-		"options": {
-			"min": 1,
-			"max": 15,
-			"step": 1
-		}
-	},
-	{
 		"name": "eyeColor",
 		"label": "Eye color",
 		"options": [
