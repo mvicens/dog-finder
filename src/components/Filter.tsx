@@ -1,5 +1,6 @@
-import { Filter as FilterType, Groups, FeatureName } from '../assets/types.ts';
+import { Filter as FilterType, Groups, FeatureName, Feature } from '../assets/types.ts';
 import { features } from '../assets/utils';
+import { Fragment } from 'react';
 
 function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: FilterType, groupIndex: number, filterIndex: number, updateFiltering: Function; }) {
 	const feature = features.filter(feature => feature.name == item.feature).at(0);
@@ -60,10 +61,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: Filt
 					<div className='col'>
 						<div className='row row-cols-auto gx-3'>
 							<div className='col'>
-								<select className='form-select form-select-sm' value={item.feature} onChange={e => changeFeature(e.target.value as '' | FeatureName)}>
-									<option value={''}>Choose field</option>
-									{features.map(feature => <option key={feature.name} value={feature.name}>{feature.label}</option>)}
-								</select>
+								<Select value={item.feature} onChange={(v: string) => changeFeature(v as '' | FeatureName)} list={features} options={(feature: Feature) => [feature.name, feature.label]} label='Choose field' />
 							</div>
 							{item.feature && (
 								['eyeColor', 'gender', 'tags'].includes(item.feature) ?
@@ -71,30 +69,19 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: Filt
 										<>
 											<div className='col'><span>is</span></div>
 											<div className='col'>
-												<select className='form-select form-select-sm' value={item.option as string} onChange={e => changeOption(e.target.value, null)}>
-													<option value={''}>Choose category</option>
-													{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
-												</select>
+												<Select value={item.option as string} onChange={(v: string) => changeOption(v, null)} list={feature?.options} label='Choose category' />
 											</div>
 										</>
 									)
 									:
-									(
-										<>
-											<div className='col'><span>between</span></div>
+									['between', 'and'].map((text, i) => (
+										<Fragment key={i}>
+											<div className='col'><span>{text}</span></div>
 											<div className='col'>
-												<select className='form-select form-select-sm' value={item.option[0]} onChange={e => changeOption(e.target.value, 0)}>
-													{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
-												</select>
+												<Select value={item.option[i] as string} onChange={(v: string) => changeOption(v, i)} list={feature?.options} />
 											</div>
-											<div className='col'><span>and</span></div>
-											<div className='col'>
-												<select className='form-select form-select-sm' value={item.option[1]} onChange={e => changeOption(e.target.value, 1)}>
-													{feature?.options.map(value => <option key={value} value={value}>{value}</option>)}
-												</select>
-											</div>
-										</>
-									)
+										</Fragment>
+									))
 							)}
 						</div>
 					</div>
@@ -103,7 +90,20 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: Filt
 					</div>
 				</div>
 			</div>
-		</article>
+		</article >
+	);
+}
+
+function Select({ value, onChange, list, options, label }: { value: string; onChange: Function; list: undefined | any[]; options?: Function; label?: string; }) {
+	return (
+		<select className='form-select form-select-sm' value={value} onChange={e => onChange(e.target.value)}>
+			{label && <option value={''}>{label}</option>}
+			{list && list.map(item => {
+				const arr = options ? options(item) : [item],
+					value = arr[0];
+				return <option key={value} value={value}>{arr[1] || value}</option>;
+			})}
+		</select>
 	);
 }
 
