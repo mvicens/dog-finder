@@ -42,11 +42,11 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: Filt
 		});
 	}
 
-	function changeOption(value: string, i: null | number) {
+	function changeOption(value: string, i?: number) {
 		updateFiltering((groups: Groups) => {
 			const filter = groups[groupIndex][filterIndex];
-			if (filter.feature !== '') {
-				if (i === null)
+			if (filter.feature != '') {
+				if (i === undefined)
 					filter.option = value;
 				else if (filter.feature == 'price' || filter.feature == 'age')
 					filter.option[i] = +value;
@@ -61,7 +61,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: Filt
 					<div className='col'>
 						<div className='row row-cols-auto gx-3'>
 							<div className='col'>
-								<Select value={item.feature} onChange={(v: string) => changeFeature(v as '' | FeatureName)} list={features} options={(feature: Feature) => [feature.name, feature.label]} label='Choose field' />
+								<Select value={item.feature} onChange={changeFeature} list={features} options={['name', 'label']} label='Choose field' />
 							</div>
 							{item.feature && (
 								['eyeColor', 'gender', 'tags'].includes(item.feature) ?
@@ -69,7 +69,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: Filt
 										<>
 											<div className='col'><span>is</span></div>
 											<div className='col'>
-												<Select value={item.option as string} onChange={(v: string) => changeOption(v, null)} list={feature?.options} label='Choose category' />
+												<Select value={item.option as string} onChange={changeOption} list={feature?.options} label='Choose category' />
 											</div>
 										</>
 									)
@@ -94,14 +94,14 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: Filt
 	);
 }
 
-function Select({ value, onChange, list, options, label }: { value: string; onChange: Function; list: undefined | any[]; options?: Function; label?: string; }) {
+function Select({ value, onChange, list, options, label }: { value: string; onChange: Function; list: undefined | any[]; options?: string[]; label?: string; }) {
 	return (
 		<select className='form-select form-select-sm' value={value} onChange={e => onChange(e.target.value)}>
 			{label && <option value={''}>{label}</option>}
 			{list && list.map(item => {
-				const arr = options ? options(item) : [item],
+				const arr = options ? [item[options[0]], item[options[1]]] : [item],
 					value = arr[0];
-				return <option key={value} value={value}>{arr[1] || value}</option>;
+				return <option key={value} value={value}>{arr[1] ?? value}</option>;
 			})}
 		</select>
 	);

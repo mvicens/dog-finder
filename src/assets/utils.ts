@@ -52,8 +52,9 @@ function assertQuantitativeName(value: string): asserts value is QuantitativeFea
 		throw new Error(`${value} is not quantitative`);
 }
 
-const numFormatter = new Intl.NumberFormat('en-US', {}),
-	currFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', });
+const lang = 'en',
+	numFormatter = new Intl.NumberFormat(lang),
+	currFormatter = new Intl.NumberFormat(lang, { style: 'currency', currency: 'USD', });
 
 function getNumberFormat(n: number) {
 	return numFormatter.format(n);

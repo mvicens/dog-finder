@@ -35,7 +35,7 @@ function App() {
 			for (const group of cleanedGroups) {
 				const hasAnyMatch = group.some(filter => {
 					const featureName = filter.feature;
-					if (featureName === '')
+					if (featureName == '')
 						return;
 					const option = filter.option;
 					if (['price', 'age'].includes(featureName)) {
