@@ -17,13 +17,15 @@ function App() {
 		getRecordsFetch().then(records => {
 			if (!isReady) {
 				totalRecords = records;
-				setRecords(records);
+				update();
 				setIsReady(true);
 			}
 		});
 	}, []);
 
-	useEffect(() => {
+	useEffect(update, [groups]);
+
+	function update() {
 		const cleanedGroups: Groups = [];
 		for (let group of groups) {
 			group = group.filter(filter => filter.feature && filter.option);
@@ -61,7 +63,7 @@ function App() {
 
 		setCounterText(counterText);
 		setRecords(records);
-	}, [groups]);
+	}
 
 	function addGroup() {
 		updateFiltering((groups: Groups) => groups.push([
