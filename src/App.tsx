@@ -24,27 +24,31 @@ function App() {
 	}, []);
 
 	useEffect(() => {
+		const cleanedGroups: Groups = [];
+		for (let group of groups) {
+			group = group.filter(filter => filter.feature && filter.option);
+			if (group.length)
+				cleanedGroups.push(group);
+		}
+
 		const records = totalRecords.filter(record => {
-			for (const group of groups) {
-				const definedFilters = group.filter(filter => filter.feature && filter.option);
-				if (definedFilters.length) {
-					const hasAnyMatch = definedFilters.some(filter => {
-						const featureName = filter.feature;
-						if (featureName === '')
-							return;
-						const option = filter.option;
-						if (['price', 'age'].includes(featureName)) {
-							const value = record[featureName];
-							return option[0] <= value && option[1] >= value;
-						}
-						if (featureName == 'tags')
-							return record[featureName].some(v => v == option);
-						if (record[featureName] == option)
-							return true;
-					});
-					if (!hasAnyMatch)
-						return false;
-				}
+			for (const group of cleanedGroups) {
+				const hasAnyMatch = group.some(filter => {
+					const featureName = filter.feature;
+					if (featureName === '')
+						return;
+					const option = filter.option;
+					if (['price', 'age'].includes(featureName)) {
+						const value = record[featureName];
+						return option[0] <= value && option[1] >= value;
+					}
+					if (featureName == 'tags')
+						return record[featureName].some(v => v == option);
+					if (record[featureName] == option)
+						return true;
+				});
+				if (!hasAnyMatch)
+					return false;
 			}
 			return true;
 		});
