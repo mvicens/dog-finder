@@ -20,6 +20,7 @@ function Group({ item, index: groupIndex, updateFiltering }: { item: GroupType; 
 						<Filter item={filter} groupIndex={groupIndex} filterIndex={filterIndex} updateFiltering={updateFiltering} />
 					</Fragment>
 				))}
+				{!item.length && <div className='text-center mb-3'>No filter</div>}
 				<button className='btn btn-dark btn-sm' onClick={addFilter}>Add filter</button>
 				<button className='btn btn-dark btn-sm float-end' onClick={deleteGroup}>Delete group</button>
 			</div>
