@@ -4,38 +4,31 @@ import { getRecordsFetch, getNumberFormat } from './assets/utils';
 import Group from './components/Group';
 import Record from './components/Record';
 
-let totalRecords: Records = [];
-
 function App() {
-	const [isReady, setIsReady] = useState(false),
+	const [originalRecords, setOriginalRecords]: [Records | undefined | null, Function] = useState(undefined),
 		[groups, setGroups]: [Groups, Function] = useState([]),
-		NO_AMOUNT_TEXT = 'No dogs found',
-		[counterText, setCounterText] = useState(NO_AMOUNT_TEXT),
 		[records, setRecords]: [Records, Function] = useState([]);
 
 	useEffect(() => {
-		getRecordsFetch().then(records => {
-			if (!isReady) {
-				totalRecords = records;
-				update();
-				setIsReady(true);
-			}
-		});
+		getRecordsFetch()
+			.then(records => setOriginalRecords(records))
+			.catch(() => setOriginalRecords(null));
 	}, []);
 
-	useEffect(update, [groups]);
+	useEffect(() => {
+		if (!originalRecords)
+			return;
 
-	function update() {
-		const cleanedGroups: Groups = [];
+		const usableGroups: Groups = [];
 		for (let group of groups) {
 			group = group.filter(filter => filter.feature && filter.option);
 			if (group.length)
-				cleanedGroups.push(group);
+				usableGroups.push(group);
 		}
 
-		const records = totalRecords.filter(record => {
-			for (const group of cleanedGroups) {
-				const hasAnyMatch = group.some(filter => {
+		const records = originalRecords.filter(record => {
+			return usableGroups.every(group => {
+				return group.some(filter => {
 					const featureName = filter.feature;
 					if (featureName == '')
 						return;
@@ -46,24 +39,12 @@ function App() {
 					}
 					if (featureName == 'tags')
 						return record[featureName].some(v => v == option);
-					if (record[featureName] == option)
-						return true;
+					return record[featureName] == option;
 				});
-				if (!hasAnyMatch)
-					return false;
-			}
-			return true;
+			});
 		});
-
-		let counterText = NO_AMOUNT_TEXT;
-		if (records.length) {
-			const number = getNumberFormat(records.length);
-			counterText = records.length == 1 ? number + ' dog found' : number + ' dogs found';
-		}
-
-		setCounterText(counterText);
 		setRecords(records);
-	}
+	}, [originalRecords, groups]);
 
 	function addGroup() {
 		updateFiltering((groups: Groups) => groups.push([
@@ -79,8 +60,22 @@ function App() {
 		});
 	}
 
-	if (!isReady)
+	if (!originalRecords) {
+		if (originalRecords === null)
+			return (
+				<div className='container-fluid my-2'>
+					<p className='alert alert-danger'>Error occurred!</p>
+				</div>
+			);
 		return null;
+	}
+
+	let counterText = 'No dogs found';
+	if (records.length) {
+		const number = getNumberFormat(records.length);
+		counterText = records.length == 1 ? number + ' dog found' : number + ' dogs found';
+	}
+
 	return (
 		<div className='container my-4'>
 			<header>
