@@ -9,7 +9,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: Filt
 		updateFiltering((groups: Groups) => groups[groupIndex].splice(filterIndex, 1));
 	}
 
-	function changeFeature(value: '' | FeatureName) {
+	function changeFeature(value: string | FeatureName) {
 		updateFiltering((groups: Groups) => {
 			const group = groups[groupIndex];
 			switch (value) {
@@ -101,9 +101,13 @@ function Select({ value, onChange, list, options, label }: { value: string; onCh
 		<select className='form-select form-select-sm' value={value} onChange={e => onChange(e.target.value)}>
 			{label && <option value={''}>{label}</option>}
 			{list && list.map(item => {
-				const arr = options ? [item[options[0]], item[options[1]]] : [item],
-					value = arr[0];
-				return <option key={value} value={value}>{arr[1] ?? value}</option>;
+				const arr = options && typeof item === 'object' ? [item[options[0]], item[options[1]]] : [item],
+					[value, label] = arr;
+				if (typeof value !== 'string' && typeof value !== 'number')
+					throw new Error('Value is not string nor is number');
+				if (label !== undefined && typeof label !== 'string' && typeof label !== 'number')
+					throw new Error('Defined label is not string nor is number');
+				return <option key={value} value={value}>{label ?? value}</option>;
 			})}
 		</select>
 	);
