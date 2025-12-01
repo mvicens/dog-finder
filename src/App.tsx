@@ -5,9 +5,9 @@ import Group from './components/Group';
 import Record from './components/Record';
 
 function App() {
-	const [originalRecords, setOriginalRecords]: [Records | undefined | null, Function] = useState(undefined),
-		[groups, setGroups]: [Groups, Function] = useState([]),
-		[records, setRecords]: [Records, Function] = useState([]);
+	const [originalRecords, setOriginalRecords] = useState<Records | undefined | null>(undefined),
+		[groups, setGroups] = useState<Groups>([]),
+		[records, setRecords] = useState<Records>([]);
 
 	useEffect(() => {
 		getRecordsFetch()
@@ -52,7 +52,7 @@ function App() {
 		]));
 	}
 
-	function updateFiltering(cb: Function) {
+	function updateFiltering(cb: (groups: Groups) => void) {
 		setGroups((groups: Groups) => {
 			const newGroups = structuredClone(groups);
 			cb(newGroups);

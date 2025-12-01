@@ -2,7 +2,7 @@ import { Group as GroupType, Groups, Filter as FilterType } from '../assets/type
 import { Fragment } from 'react';
 import Filter from './Filter';
 
-function Group({ item, index: groupIndex, updateFiltering }: { item: GroupType; index: number; updateFiltering: Function; }) {
+function Group({ item, index: groupIndex, updateFiltering }: { item: GroupType; index: number; updateFiltering: (cb: (groups: Groups) => void) => void; }) {
 	function deleteGroup() {
 		updateFiltering((groups: Groups) => groups.splice(groupIndex, 1));
 	}

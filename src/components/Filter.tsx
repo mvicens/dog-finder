@@ -1,8 +1,8 @@
-import { Filter as FilterType, Groups, FeatureName, Feature } from '../assets/types.ts';
+import { Filter as FilterType, Groups, FeatureName } from '../assets/types.ts';
 import { features } from '../assets/utils';
 import { Fragment } from 'react';
 
-function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: FilterType, groupIndex: number, filterIndex: number, updateFiltering: Function; }) {
+function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: FilterType, groupIndex: number, filterIndex: number, updateFiltering: (cb: (groups: Groups) => void) => void; }) {
 	const feature = features.filter(feature => feature.name == item.feature).at(0);
 
 	function deleteFilter() {
@@ -23,19 +23,21 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: Filt
 					break;
 				case 'price':
 				case 'age':
-					const feature = features.filter(feature => feature.name == value).at(0);
-					if (!feature)
-						return;
-					const minOption = feature.options[0],
-						maxOption = feature.options.at(-1);
-					if (feature &&
-						typeof minOption == 'number' &&
-						typeof maxOption == 'number')
-						group[filterIndex] = {
-							feature: value,
-							option: [minOption, maxOption]
-						};
-					break;
+					{
+						const feature = features.filter(feature => feature.name == value).at(0);
+						if (!feature)
+							return;
+						const minOption = feature.options[0],
+							maxOption = feature.options.at(-1);
+						if (feature &&
+							typeof minOption == 'number' &&
+							typeof maxOption == 'number')
+							group[filterIndex] = {
+								feature: value,
+								option: [minOption, maxOption]
+							};
+						break;
+					}
 				default:
 					group[filterIndex] = { feature: '' };
 			}
@@ -94,7 +96,7 @@ function Filter({ item, groupIndex, filterIndex, updateFiltering }: { item: Filt
 	);
 }
 
-function Select({ value, onChange, list, options, label }: { value: string; onChange: Function; list: undefined | any[]; options?: string[]; label?: string; }) {
+function Select({ value, onChange, list, options, label }: { value: string; onChange: (value: string | FeatureName) => void; list: undefined | (Record<string, unknown> | string | number)[]; options?: string[]; label?: string; }) {
 	return (
 		<select className='form-select form-select-sm' value={value} onChange={e => onChange(e.target.value)}>
 			{label && <option value={''}>{label}</option>}
